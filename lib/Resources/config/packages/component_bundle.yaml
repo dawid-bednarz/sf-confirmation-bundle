@@ -1,0 +1,3 @@
+dawbed_component_bundle:
+    debug_event_commands:
+            -  !php/const DawBed\ConfirmationBundle\Command\EventListenerDebugerCommand::NAME

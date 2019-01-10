@@ -1,0 +1,7 @@
+tokenAcceptation:
+    path: /accept/{token}
+    methods: [GET,OPTIONS]
+    controller: DawBed\ConfirmationBundle\Controller\Token\TokenController::accept
+
+
+
