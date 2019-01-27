@@ -1,0 +1,4 @@
+token:
+  isExpired: Token jest przeterminowany.
+  isConsumed: Token został już użyty.
+  invalid: Token jest nieprawidłowy

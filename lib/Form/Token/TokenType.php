@@ -29,6 +29,7 @@ class TokenType extends AbstractType
             ->add('entity', EntityType::class, [
                 'class' => $this->entityService->Token,
                 'choice_value' => 'value',
+                'label' => 'token'
             ]);
     }
 
