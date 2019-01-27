@@ -9,5 +9,10 @@ namespace DawBed\ConfirmationBundle\EventListener\Token;
 
 class TokenIsAlreadyConsumedException extends \Exception
 {
-    public $message = 'Token is consumed!';
+    public $message = 'token.isConsumed';
+
+    public function setMessage(string $content)
+    {
+        $this->message = $content;
+    }
 }
