@@ -5,10 +5,10 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\EventListener\Token;
+namespace DawBed\ConfirmationBundle\EventListener;
 
-use DawBed\ConfirmationBundle\Event\Token\GenerateEvent;
-use DawBed\ConfirmationBundle\Service\Token\GenerateService;
+use DawBed\ConfirmationBundle\Event\GenerateEvent;
+use DawBed\ConfirmationBundle\Service\GenerateService;
 
 class GenerateListener
 {
@@ -21,9 +21,6 @@ class GenerateListener
 
     public function __invoke(GenerateEvent $generateEvent): void
     {
-        $model = $this->generateService->prepareModel($generateEvent->getSetting());
-        $this->generateService->generate($model);
-
-        $generateEvent->setToken($model->getEntity());
+        $generateEvent->setToken($this->generateService->generate($generateEvent->getSetting()));
     }
 }

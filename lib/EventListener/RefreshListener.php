@@ -5,18 +5,16 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\EventListener\Token;
+namespace DawBed\ConfirmationBundle\EventListener;
 
-use DawBed\ConfirmationBundle\Event\Token\RefreshEvent;
-use DawBed\ConfirmationBundle\Service\Token\CreateService;
-use DawBed\ConfirmationBundle\Service\Token\GenerateService;
-use DawBed\PHPToken\Model\CreateModel;
+use DawBed\ConfirmationBundle\Event\RefreshEvent;
+use DawBed\ConfirmationBundle\Service\CreateService;
 
 class RefreshListener
 {
     private $createService;
 
-    function __construct(CreateService $createService, GenerateService $generateService)
+    function __construct(CreateService $createService)
     {
         $this->createService = $createService;
     }

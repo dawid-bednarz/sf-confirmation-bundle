@@ -43,7 +43,7 @@ class ConfirmationBundle extends Bundle implements ComponentBundleInterface
     private function addRegisterMappingsPass(ContainerBuilder $container)
     {
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\PHPToken',
+            realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\ConfirmationBundle\Entity',
         );
 
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {

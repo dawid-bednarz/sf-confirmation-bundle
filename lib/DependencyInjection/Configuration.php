@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle\DependencyInjection;
 
 use DawBed\ComponentBundle\Configuration\Entity;
-use DawBed\PHPToken\Token;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('dawbed_confirmation_bundle');
 
         $entity = new Entity($rootNode);
-        $entity->new('token', Token::class);
+        $entity->new(AbstractToken::class, AbstractToken::class);
 
         $rootNode
             ->children()

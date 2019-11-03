@@ -7,8 +7,9 @@ declare(strict_types=1);
 
 namespace DawBed\ConfirmationBundle\DependencyInjection\Compiler;
 
-use DawBed\ConfirmationBundle\Service\EntityService;
-use DawBed\PHPToken\TokenInterface;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
+use DawBed\ConfirmationBundle\Entity\TokenInterface;
+use DawBed\PHPClassProvider\ClassProvider;
 use Doctrine\ORM\Version;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,13 +18,11 @@ class DoctrineResolveTargetEntityPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $entityService = $container->get(EntityService::class);
-
         $definition = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
 
         $definition->addMethodCall('addResolveTargetEntity', [
             TokenInterface::class,
-            $entityService->Token,
+            ClassProvider::get(AbstractToken::class),
             [],
         ]);
 

@@ -5,24 +5,23 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Event\Token;
+namespace DawBed\ConfirmationBundle\Event;
 
 use DawBed\ComponentBundle\Event\AbstractEvent;
-use DawBed\ConfirmationBundle\Event\Events;
-use DawBed\PHPToken\DTO\TokenSetting;
-use DawBed\PHPToken\TokenInterface;
+use DawBed\ConfirmationBundle\Entity\TokenInterface;
+use DawBed\ConfirmationBundle\Model\Criteria\TokenCriteria;
 
 class GenerateEvent extends AbstractEvent
 {
     protected $setting;
     protected $token;
 
-    function __construct(TokenSetting $setting)
+    function __construct(TokenCriteria $setting)
     {
         $this->setting = $setting;
     }
 
-    public function getSetting(): TokenSetting
+    public function getSetting(): TokenCriteria
     {
         return $this->setting;
     }

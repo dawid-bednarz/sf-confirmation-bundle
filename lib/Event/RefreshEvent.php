@@ -5,15 +5,14 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Event\Token;
+namespace DawBed\ConfirmationBundle\Event;
 
-use DawBed\ConfirmationBundle\Event\Events;
-use DawBed\PHPToken\DTO\TokenSetting;
-use DawBed\PHPToken\TokenInterface;
+use DawBed\ConfirmationBundle\Entity\TokenInterface;
+use DawBed\ConfirmationBundle\Model\Criteria\TokenCriteria;
 
 class RefreshEvent extends GenerateEvent
 {
-    function __construct(TokenInterface $oldToken, TokenSetting $tokenSetting)
+    function __construct(TokenInterface $oldToken, TokenCriteria $tokenSetting)
     {
         parent::__construct($tokenSetting);
         $this->setToken($oldToken);

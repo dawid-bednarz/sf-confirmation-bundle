@@ -5,22 +5,16 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Form\Token;
+namespace DawBed\ConfirmationBundle\Form;
 
-use DawBed\ConfirmationBundle\Service\EntityService;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
+use DawBed\PHPClassProvider\ClassProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityType extends AbstractType
 {
-    private $entityService;
-
-    function __construct(EntityService $entityService)
-    {
-        $this->entityService = $entityService;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,7 +24,7 @@ class EntityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->entityService->Token
+            'data_class' => ClassProvider::get(AbstractToken::class)
         ]);
     }
 

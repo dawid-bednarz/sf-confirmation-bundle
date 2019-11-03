@@ -4,15 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Controller\Token;
+namespace DawBed\ConfirmationBundle\Controller;
 
 use DawBed\ComponentBundle\Service\EventDispatcher;
 use DawBed\ConfirmationBundle\Event\Token\AcceptEvent;
 use DawBed\ConfirmationBundle\Event\Token\ErrorEvent;
-use DawBed\ConfirmationBundle\Form\Token\TokenType;
-use DawBed\ConfirmationBundle\Service\Token\AcceptService;
+use DawBed\ConfirmationBundle\Form\TokenType;
+use DawBed\ConfirmationBundle\Model\AcceptModel;
+use DawBed\ConfirmationBundle\Service\AcceptService;
 use DawBed\ConfirmationBundle\Validator\ValidatorGroup;
-use DawBed\PHPToken\Model\AcceptModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

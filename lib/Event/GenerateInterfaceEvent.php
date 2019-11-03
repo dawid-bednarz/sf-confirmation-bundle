@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Event\Token;
+namespace DawBed\ConfirmationBundle\Event;
 
-use DawBed\PHPToken\TokenInterface;
+use DawBed\ConfirmationBundle\Entity\TokenInterface;
 
 interface GenerateInterfaceEvent
 {

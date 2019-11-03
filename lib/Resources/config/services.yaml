@@ -6,9 +6,9 @@ services:
     DawBed\ConfirmationBundle\:
         resource: '%bundle_dir%/*'
         exclude: '%bundle_dir%/{DependencyInjection,Entity,Migrations,Tests}'
-    DawBed\ConfirmationBundle\EventListener\Token\GenerateListener:
+    DawBed\ConfirmationBundle\EventListener\GenerateListener:
         tags:
             - { name: kernel.event_listener, event: !php/const DawBed\ConfirmationBundle\Event\Events::GENERATE_TOKEN }
-    DawBed\ConfirmationBundle\EventListener\Token\RefreshListener:
+    DawBed\ConfirmationBundle\EventListener\RefreshListener:
         tags:
             - { name: kernel.event_listener, event: !php/const DawBed\ConfirmationBundle\Event\Events::REFRESH_TOKEN }

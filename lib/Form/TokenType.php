@@ -5,10 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Form\Token;
+namespace DawBed\ConfirmationBundle\Form;
 
-use DawBed\ConfirmationBundle\Service\EntityService;
-use DawBed\PHPToken\Model\AcceptModel;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
+use DawBed\ConfirmationBundle\Model\AcceptModel;
+use DawBed\PHPClassProvider\ClassProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,18 +17,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TokenType extends AbstractType
 {
-    private $entityService;
-
-    function __construct(EntityService $entityService)
-    {
-        $this->entityService = $entityService;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('entity', EntityType::class, [
-                'class' => $this->entityService->Token,
+                'class' => ClassProvider::get(AbstractToken::class),
                 'choice_value' => 'value',
                 'label' => 'token'
             ]);

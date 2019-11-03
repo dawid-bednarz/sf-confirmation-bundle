@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Service\Token;
+namespace DawBed\ConfirmationBundle\Service;
 
 use DawBed\PHPToken\Model\AcceptModel;
 use Doctrine\ORM\EntityManagerInterface;

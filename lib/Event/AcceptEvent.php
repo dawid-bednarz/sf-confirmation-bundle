@@ -5,11 +5,10 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Event\Token;
+namespace DawBed\ConfirmationBundle\Event;
 
 use DawBed\ComponentBundle\Event\AbstractResponseEvent;
-use DawBed\ConfirmationBundle\Event\Events;
-use DawBed\PHPToken\TokenInterface;
+use DawBed\ConfirmationBundle\Entity\TokenInterface;
 
 class AcceptEvent extends AbstractResponseEvent
 {

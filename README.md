@@ -7,10 +7,11 @@ Support for elastic confirmation operations in system, such as, registration use
 ```php
 namespace App\Entity\Token;
 
-use DawBed\PHPToken\Token as Base;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
 
-class Token extends Base
+class Token extends AbstractToken
 {
+
 }
 ```
 # CONFIGURATION
@@ -18,7 +19,7 @@ Add file in config/packages/confirmation_bundle.yaml and define your type of tok
 ```yaml
 dawbed_confirmation_bundle:
     entities:
-         token: App\Entity\Token
+        DawBed\ConfirmationBundle\Entity\AbstractToken: App\Entity\Token
     token_types:
           - 'user-confirm-acdcount'
 ```

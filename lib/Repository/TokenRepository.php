@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace DawBed\ConfirmationBundle\Repository;
 
-use DawBed\PHPToken\Token;
+use DawBed\ConfirmationBundle\Entity\AbstractToken;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
 
 class TokenRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, $entityClass = Token::class)
+    public function __construct(ManagerRegistry $registry, $entityClasss = AbstractToken::class)
     {
-        parent::__construct($registry, $entityClass);
+        parent::__construct($registry, $entityClasss);
     }
 
     public function getItterator(): IterableResult

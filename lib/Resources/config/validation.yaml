@@ -1,10 +1,10 @@
-DawBed\PHPToken\Token:
+DawBed\ConfirmationBundle\Model\Token:
       properties:
          expired:
            - DawBed\ConfirmationBundle\Validator\Constraints\Token\Expired: { groups: [accept] }
          consume:
            - DawBed\ConfirmationBundle\Validator\Constraints\Token\Consume: { groups: [accept] }
-DawBed\PHPToken\Model\AcceptModel:
+DawBed\ConfirmationBundle\Model\AcceptModel:
       constrainsts:
          - Symfony\Component\Validator\Constraints\Vadlid:
              fielsds: [entity]

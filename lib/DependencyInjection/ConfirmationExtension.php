@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace DawBed\ConfirmationBundle\DependencyInjection;
 
-use DawBed\ConfirmationBundle\Service\EntityService;
-use DawBed\ConfirmationBundle\Service\Token\SupportTypeService;
+use DawBed\ConfirmationBundle\Service\SupportTypeService;
+use DawBed\PHPClassProvider\ClassProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -34,7 +34,7 @@ class ConfirmationExtension extends Extension implements PrependExtensionInterfa
         $loader = $this->prepareLoader($container);
         $loader->load('services.yaml');
         $this->prepareSupportTypeService($configs, $container);
-        $this->prepareEntityService($config['entities'], $container);
+        $this->prepareEntityService($config['entities']);
     }
 
     public function getAlias(): string
@@ -54,12 +54,11 @@ class ConfirmationExtension extends Extension implements PrependExtensionInterfa
         ]));
     }
 
-    private function prepareEntityService(array $entities, ContainerBuilder $container): void
+    private function prepareEntityService(array $entities): void
     {
-        $container->setDefinition(EntityService::class, new Definition(EntityService::class, [[
-                'Token' => $entities['token'],
-            ]]
-        ));
+        foreach ($entities as $name => $class) {
+            ClassProvider::add($name,$class);
+        }
     }
 
     private function getTypesToken(array $configs): array
