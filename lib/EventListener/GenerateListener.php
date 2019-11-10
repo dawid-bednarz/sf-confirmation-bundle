@@ -8,19 +8,19 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle\EventListener;
 
 use DawBed\ConfirmationBundle\Event\GenerateEvent;
-use DawBed\ConfirmationBundle\Service\GenerateService;
+use DawBed\ConfirmationBundle\Service\WriteService;
 
 class GenerateListener
 {
-    private $generateService;
+    private $service;
 
-    function __construct(GenerateService $generateService)
+    function __construct(WriteService $service)
     {
-        $this->generateService = $generateService;
+        $this->service = $service;
     }
 
     public function __invoke(GenerateEvent $generateEvent): void
     {
-        $generateEvent->setToken($this->generateService->generate($generateEvent->getSetting()));
+        $generateEvent->setToken($this->service->generate($generateEvent->getSetting()));
     }
 }

@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\Service;
+namespace DawBed\ConfirmationBundle\Exception;
 
 class SupportTypeException extends \Exception
 {

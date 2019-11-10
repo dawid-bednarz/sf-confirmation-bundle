@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace DawBed\ConfirmationBundle\EventListener;
+namespace DawBed\ConfirmationBundle\Exception;
 
 class TokenIsAlreadyConsumedException extends \Exception
 {

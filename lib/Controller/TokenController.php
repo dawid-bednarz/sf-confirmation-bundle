@@ -6,57 +6,42 @@ declare(strict_types=1);
 
 namespace DawBed\ConfirmationBundle\Controller;
 
-use DawBed\ComponentBundle\Service\EventDispatcher;
+use DawBed\ComponentBundle\Helper\EventResponseController;
 use DawBed\ConfirmationBundle\Event\Token\AcceptEvent;
 use DawBed\ConfirmationBundle\Event\Token\ErrorEvent;
-use DawBed\ConfirmationBundle\Form\TokenType;
-use DawBed\ConfirmationBundle\Model\AcceptModel;
-use DawBed\ConfirmationBundle\Service\AcceptService;
+use DawBed\ConfirmationBundle\Form\WriteType;
+use DawBed\ConfirmationBundle\Model\WriteModel;
+use DawBed\ConfirmationBundle\Service\WriteService;
 use DawBed\ConfirmationBundle\Validator\ValidatorGroup;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TokenController extends AbstractController
 {
-    private $eventDispatcher;
+    use EventResponseController;
 
-    function __construct(EventDispatcher $eventDispatcher)
+    public function accept(Request $request, WriteService $service): Response
     {
-        $this->eventDispatcher = $eventDispatcher;
-    }
+        $model = WriteModel::consumedInstance();
 
-    public function accept(Request $request, AcceptService $acceptService): Response
-    {
-        $model = new AcceptModel();
-
-        $form = $this->createForm(TokenType::class, $model, [
-            'method' => 'POST',
+        $form = $this->createForm(WriteType::class, $model, [
+            'method' => Request::METHOD_POST,
             'validation_groups' => [ValidatorGroup::ACCEPT]
         ]);
 
-        $form->submit([
-            'entity' => $request->get('token')
-        ]);
+        $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
             if (!$form->getData()->hasEntity()) {
-                throw new NotFoundHttpException();
+                return $this->notSubmittedForm();
             }
-
-            return $this->eventDispatcher->dispatch(new ErrorEvent($form->getData()->getEntity(), $form), $form)
-                ->getResponse();
+            return $this->response(new ErrorEvent($form->getData()->getEntity(), $form));
         }
+        $em = $service->make($model);
 
-        $em = $acceptService->byModel($model);
+        $response = $this->response(new AcceptEvent($model->getEntity()));
 
-        $response = $this->eventDispatcher->dispatch(new AcceptEvent($model->getEntity()))
-            ->getResponse();
-
-        if (is_null($response)) {
-            throw new NotFoundHttpException();
-        }
         $em->flush();
 
         return $response;

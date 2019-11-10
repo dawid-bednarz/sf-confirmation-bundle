@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace DawBed\ConfirmationBundle\Service;
 
+use DawBed\ConfirmationBundle\Exception\SupportTypeException;
+
 class SupportTypeService
 {
     private $types;
@@ -16,8 +18,10 @@ class SupportTypeService
         $this->types = $types;
     }
 
-    public function check(string $type)
+    public function check(string $type) : void
     {
-        return in_array($type, $this->types);
+       if(in_array($type, $this->types)) {
+           throw new SupportTypeException(sprintf('"%s" type is not supported. Before use type add him to configuration file.', $type));
+       }
     }
 }

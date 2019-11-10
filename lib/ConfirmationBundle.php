@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle;
 
 use DawBed\ComponentBundle\DependencyInjection\ChildrenBundle\ComponentBundleInterface;
-use DawBed\ConfirmationBundle\DependencyInjection\Compiler\DoctrineResolveTargetEntityPass;
+use DawBed\ConfirmationBundle\DependencyInjection\Compiler\DoctrineConfigurationPass;
 use DawBed\ConfirmationBundle\DependencyInjection\ConfirmationExtension;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -26,7 +26,7 @@ class ConfirmationBundle extends Bundle implements ComponentBundleInterface
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new DoctrineResolveTargetEntityPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1000);
+        $container->addCompilerPass(new DoctrineConfigurationPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1000);
         $this->addRegisterMappingsPass($container);
     }
 
@@ -42,12 +42,8 @@ class ConfirmationBundle extends Bundle implements ComponentBundleInterface
 
     private function addRegisterMappingsPass(ContainerBuilder $container)
     {
-        $mappings = array(
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver([
             realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\ConfirmationBundle\Entity',
-        );
-
-        if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
-            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings));
-        }
+        ]));
     }
 }

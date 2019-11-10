@@ -8,15 +8,17 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle\EventListener;
 
 use DawBed\ConfirmationBundle\Event\RefreshEvent;
-use DawBed\ConfirmationBundle\Service\CreateService;
+use DawBed\ConfirmationBundle\Exception\TokenIsAlreadyConsumedException;
+use DawBed\ConfirmationBundle\Model\WriteModel;
+use DawBed\ConfirmationBundle\Service\WriteService;
 
 class RefreshListener
 {
-    private $createService;
+    private $writeService;
 
-    function __construct(CreateService $createService)
+    function __construct(WriteService $writeService)
     {
-        $this->createService = $createService;
+        $this->writeService = $writeService;
     }
 
     function __invoke(RefreshEvent $event): void
@@ -24,6 +26,6 @@ class RefreshListener
         if ($event->getToken()->isConsume()) {
             throw new TokenIsAlreadyConsumedException();
         }
-        $this->createService->byModel(new CreateModel($event->getToken(), $event->getSetting()->getExpiredInterval()));
+        $this->writeService->create(WriteModel::baseInstance($event->getToken(), $event->getSetting()->getExpiredInterval()));
     }
 }

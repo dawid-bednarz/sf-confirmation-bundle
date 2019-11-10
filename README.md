@@ -3,17 +3,6 @@ Support for elastic confirmation operations in system, such as, registration use
 # INSTALLATION
 `composer require dawid-bednarz/sf-confirmation-bundle`
 
-####1. Create entities file
-```php
-namespace App\Entity\Token;
-
-use DawBed\ConfirmationBundle\Entity\AbstractToken;
-
-class Token extends AbstractToken
-{
-
-}
-```
 # CONFIGURATION
 Add file in config/packages/confirmation_bundle.yaml and define your type of tokens
 ```yaml
@@ -21,7 +10,7 @@ dawbed_confirmation_bundle:
     entities:
         DawBed\ConfirmationBundle\Entity\AbstractToken: App\Entity\Token
     token_types:
-          - 'user-confirm-acdcount'
+          - 'user-confirm-account'
 ```
 Pre definition of token types is for avoid unconscious duplication.
 # CREATE TOKEN
