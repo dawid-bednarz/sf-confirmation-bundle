@@ -13,16 +13,23 @@ class TokenCriteria
 {
     protected $expiredInterval;
     protected $type;
+    private $data;
 
-    function __construct(DateInterval $expired, string $type)
+    function __construct(DateInterval $expired, string $type, array $data=[])
     {
         $this->expiredInterval = $expired;
         $this->type = $type;
+        $this->data = $data;
     }
 
     public function getType(): string
     {
         return $this->type;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
     }
 
     public function getExpiredInterval(): DateInterval

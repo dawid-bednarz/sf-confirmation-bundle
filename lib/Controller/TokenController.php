@@ -7,8 +7,8 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle\Controller;
 
 use DawBed\ComponentBundle\Helper\EventResponseController;
-use DawBed\ConfirmationBundle\Event\Token\AcceptEvent;
-use DawBed\ConfirmationBundle\Event\Token\ErrorEvent;
+use DawBed\ConfirmationBundle\Event\AcceptEvent;
+use DawBed\ConfirmationBundle\Event\ErrorEvent;
 use DawBed\ConfirmationBundle\Form\WriteType;
 use DawBed\ConfirmationBundle\Model\WriteModel;
 use DawBed\ConfirmationBundle\Service\WriteService;

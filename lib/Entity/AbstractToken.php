@@ -13,6 +13,7 @@ abstract class AbstractToken implements TokenInterface
     protected $value;
     protected $type;
     protected $expired;
+    protected $data = [];
     protected $consume = false;
 
     public function __construct()
@@ -87,4 +88,15 @@ abstract class AbstractToken implements TokenInterface
         return $this;
     }
 
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    public function setData(array $data): AbstractToken
+    {
+        $this->data = $data;
+
+        return $this;
+    }
 }

@@ -23,6 +23,8 @@ interface TokenInterface
 
     public function getExpired(): ?\DateTime;
 
+    public function getData(): array;
+
     public function setExpired(\DateTime $expired): TokenInterface;
 
     public function isConsume(): bool;

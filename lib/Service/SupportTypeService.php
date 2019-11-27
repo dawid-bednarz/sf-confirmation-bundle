@@ -20,8 +20,10 @@ class SupportTypeService
 
     public function check(string $type) : void
     {
-       if(in_array($type, $this->types)) {
-           throw new SupportTypeException(sprintf('"%s" type is not supported. Before use type add him to configuration file.', $type));
+       if(!in_array($type, $this->types)) {
+           throw new SupportTypeException(sprintf(
+               '"%s" type is not supported. Before use type add him to configuration file.',
+               $type));
        }
     }
 }

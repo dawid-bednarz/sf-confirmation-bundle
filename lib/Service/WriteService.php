@@ -13,6 +13,7 @@ use DawBed\ConfirmationBundle\Model\WriteModel;
 use DawBed\ConfirmationBundle\Model\Criteria\TokenCriteria;
 use DawBed\PHPClassProvider\ClassProvider;
 use Doctrine\ORM\EntityManagerInterface;
+use Firebase\JWT\JWT;
 
 class WriteService
 {
@@ -28,6 +29,7 @@ class WriteService
     public function prepareModel(TokenCriteria $tokenSetting): WriteModel
     {
         return WriteModel::baseInstance((ClassProvider::new(AbstractToken::class))
+            ->setData($tokenSetting->getData())
             ->setType($tokenSetting->getType()), $tokenSetting->getExpiredInterval());
     }
 
