@@ -8,12 +8,13 @@ declare(strict_types=1);
 namespace DawBed\ConfirmationBundle\Model;
 
 use DawBed\ConfirmationBundle\Entity\TokenInterface;
+use DateInterval;
 
 class WriteModel
 {
-    private $entity;
-    private $consume = false;
-    private $dateInterval;
+    private TokenInterface $entity;
+    private DateInterval $dateInterval;
+    private bool $consume = false;
 
     public static function consumedInstance(?TokenInterface $token = null): WriteModel
     {
@@ -24,7 +25,7 @@ class WriteModel
         return $model;
     }
 
-    public static function baseInstance(TokenInterface $token, \DateInterval $dateInterval): WriteModel
+    public static function baseInstance(TokenInterface $token, DateInterval $dateInterval): WriteModel
     {
         $model = new self;
         $model->entity = $token;

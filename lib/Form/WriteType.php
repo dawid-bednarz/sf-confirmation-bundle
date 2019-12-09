@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class WriteType extends AbstractType
 {
@@ -24,7 +25,10 @@ class WriteType extends AbstractType
                 'attr' => 'entity',
                 'class' => ClassProvider::get(AbstractToken::class),
                 'choice_value' => 'value',
-                'label' => 'token'
+                'label' => 'token',
+                'constraints' => [
+                    new Valid()
+                ]
             ]);
     }
 

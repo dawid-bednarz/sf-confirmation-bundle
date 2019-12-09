@@ -16,7 +16,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class TokenRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, $entityClasss = AbstractToken::class)
+    public function __construct(ManagerRegistry $registry, string $entityClasss = AbstractToken::class)
     {
         parent::__construct($registry, ClassProvider::get($entityClasss));
     }

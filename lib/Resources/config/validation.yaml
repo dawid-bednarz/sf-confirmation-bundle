@@ -1,15 +1,11 @@
-DawBed\ConfirmationBundle\Model\Token:
+DawBed\ConfirmationBundle\Entity\AbstractToken:
       properties:
          expired:
            - DawBed\ConfirmationBundle\Validator\Constraints\Token\Expired: { groups: [accept] }
          consume:
            - DawBed\ConfirmationBundle\Validator\Constraints\Token\Consume: { groups: [accept] }
-DawBed\ConfirmationBundle\Model\AcceptModel:
-      constrainsts:
-         - Symfony\Component\Validator\Constraints\Vadlid:
-             fielsds: [entity]
-      properties:
-         entity:
-           - NotBlank: ~
-           - Valid: ~
 
+DawBed\ConfirmationBundle\Model\WriteModel:
+  properties:
+    entity:
+      - NotBlank: { groups: [accept] }
